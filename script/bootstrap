@@ -1,0 +1,6 @@
+#!/bin/zsh -euo pipefail
+
+curl https://download2.gluonhq.com/openjfx/14/openjfx-14_osx-x64_bin-sdk.zip | tar -xz
+curl https://download2.gluonhq.com/openjfx/14/openjfx-14_osx-x64_bin-jmods.zip" | tar -xz
+curl https://download2.gluonhq.com/openjfx/14/openjfx-14-javadoc.zip | tar -xz
+unzip -q javafx-sdk-14/lib/src.zip -d javafx-src-14
