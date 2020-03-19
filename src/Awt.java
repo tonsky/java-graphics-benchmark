@@ -55,7 +55,7 @@ public class Awt {
         Foreground fg = new Foreground();
         Screen sc = new Screen();
         FPS fps = new FPS();
-        Compositor compositor = new Compositor(bg, sc, fg, fps);
+        Compositor compositor = new Compositor(bg, sc, fg, new Toggles(), fps);
 
         while (true) {
             compositor.paint(frame);
@@ -145,9 +145,10 @@ class Compositor {
 
     public void paintDirect(Layer layer, Graphics2D g) {
         var t0 = System.nanoTime();
-        g.translate(layer.pos.x, layer.pos.y);
-        layer.paintImpl(g);
-        g.translate(-layer.pos.x, -layer.pos.y);
+        var g2 = (Graphics2D) g.create();
+        g2.translate(layer.pos.x, layer.pos.y);
+        layer.paintImpl(g2);
+        g2.dispose();
         var dt = (System.nanoTime() - t0) / 1_000_000.0;
         System.out.println("  ┌ " + layer.getClass().getName() + " took " + dt + " ms");
     }
@@ -162,6 +163,8 @@ class Compositor {
                 Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
                 g.setBackground(Color.WHITE);
                 g.clearRect(0, 0, 1300, 800);
+                g.setRenderingHint​(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 // var transform = new AffineTransform();
                 // transform.setToScale(1.0, 1.0);
                 // g.setTransform(transform);
@@ -275,6 +278,37 @@ class Background extends Layer {
     }
 }
 
+class Toggles extends Layer {
+    public Toggles() {
+        pos = new Point(500, 100);
+    }
+
+    public void paintImpl(Graphics2D g) {
+        var g2 = g.create();
+        for (int i = 0; i < 20; ++i) {
+            paintToggle(g, false);
+            g.translate(69, 0);
+            paintToggle(g, true);
+            g.translate(-69, 33);
+        }
+        g2.dispose();
+    }
+
+    public void paintToggle(Graphics2D g, boolean on) {
+        var g2 = (Graphics2D) g.create();
+        var bg = on ? new Color(53/256f, 199/256f, 89/256f) : new Color(233/256f, 233/256f, 235/256f);
+        g2.setColor(bg);
+        
+        g2.clip(new RoundRectangle2D.Double(0.0, 0.0, 51.0, 31.0, 31.0, 31.0));
+        g2.fillRect(0, 0, 51, 31);
+
+        // g2.fillRoundRect(0, 0, 51, 31, 31, 31);
+        
+        g2.setColor(Color.WHITE);
+        g2.fillOval(on ? 22 : 2, 2, 27, 27);
+        g2.dispose();
+    }
+}
 
 class Screen extends Layer {
     FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);

@@ -65,7 +65,6 @@ public class FX extends Application {
     long[] times = new long[10];
     int idx = 0;
     long lastT = System.nanoTime();
-    long frameTime = 0;
 
     void paintFPS(GraphicsContext gc) {
         var t = System.nanoTime();
@@ -80,7 +79,6 @@ public class FX extends Application {
             gc.setFill(Color.BLACK);
             gc.fillText("FPS min " + 1_000_000_000 / max, 1000, 24);
             gc.fillText("FPS max " + 1_000_000_000 / max, 1000, 48);
-            gc.fillText("Frame time " + (frameTime / 1_000_000.0) + "ms", 1000, 72);
         }
     }
 
@@ -127,6 +125,57 @@ public class FX extends Application {
         offset = (offset + 1) % 60;
     }
 
+    void paintToggle(GraphicsContext gc, boolean on) {
+        gc.save();
+
+        gc.beginPath();
+        
+        // gc.moveTo(0, 15.5);
+        // gc.arcTo(0, 0, 15.5, 0, 15.5);
+        // gc.lineTo(35.5, 0);
+        // gc.arcTo(51, 0, 51, 15.5, 15.5);
+        // gc.arcTo(51, 31, 31.5, 31, 15.5);
+        // gc.lineTo(15.5, 31);
+        // gc.arcTo(0, 31, 0, 15.5, 15.5);
+
+        gc.moveTo(15.5, 31);
+        gc.arc(15.5, 15.5, 15.5, 15.5, 90, 180);
+        gc.lineTo(35.5, 31);
+        gc.arc(35.5, 15.5, 15.5, 15.5, 270, 180);
+        gc.lineTo(15.5, 0);
+
+        // gc.rect(0, 0, 51, 31);
+
+        gc.closePath();
+        gc.clip();
+
+        var bg = on ? new Color(53/256.0, 199/256.0, 89/256.0, 1) : new Color(233/256.0, 233/256.0, 235/256.0, 1);
+        gc.setFill(bg);
+        gc.fillRect(0, 0, 51, 31);
+        // gc.fillRoundRect(0, 0, 51, 31, 31, 31);
+
+        // gc.beginPath();
+        // gc.moveTo(15.5, 31);
+        // gc.arc(15.5, 15.5, 15.5, 15.5, 90, 180);
+        // gc.lineTo(35.5, 31);
+        // gc.arc(35.5, 15.5, 15.5, 15.5, 270, 180);
+        // gc.lineTo(15.5, 0);
+        // gc.closePath();
+        // gc.fill();
+
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(8.0);
+        dropShadow.setOffsetX(0.0);
+        dropShadow.setOffsetY(4.0);
+        dropShadow.setColor(Color.color(0, 0, 0, 0.1));
+        gc.setEffect(dropShadow);
+
+        gc.setFill(Color.WHITE);
+        gc.fillOval(on ? 22 : 2, 2, 27, 27);
+        gc.setEffect(null);
+        gc.restore();
+    }
+
     void repaint(GraphicsContext gc) {
         var t = System.nanoTime();
         gc.clearRect(0, 0, width, height);
@@ -135,8 +184,18 @@ public class FX extends Application {
         paintFPS(gc);
         paintFiles(gc);
         paintCode(gc);
+
+        gc.save();
+        gc.translate(500, 100);
+        for (int i = 0; i < 20; ++i) {
+            paintToggle(gc, false);
+            gc.translate(69, 0);
+            paintToggle(gc, true);
+            gc.translate(-69, 33);
+        }
+        gc.restore();
+
         paintColumn(gc);
-        frameTime = System.nanoTime() - t;
     }
 
     @Override

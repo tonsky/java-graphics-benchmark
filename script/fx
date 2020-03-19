@@ -5,4 +5,4 @@ FX=javafx-sdk-14/lib
 # -Djavafx.animation.fullspeed=true
 
 javac --module-path $FX --add-modules javafx.graphics -d classes src/FX.java
-java --module-path $FX --add-modules javafx.graphics -Dprism.verbose=true -cp classes FX
+java --module-path $FX --add-modules javafx.graphics -Dprism.verbose=true -Djavafx.pulseLogger=true -cp classes FX

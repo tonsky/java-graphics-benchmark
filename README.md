@@ -11,9 +11,13 @@ In both test I didn’t use AWT/Swing/JavaFX components/scene, but created a ful
 ![](screenshots/awt.png)
 
 - 20-30 fps for 2600x1600 window
+- Drawing 40 rounded rects ~20 fps
+- Clipping 40 rounded rects ~15 fps
 - No VSync
 - Double buffering seems to be really expensive
-- No way to control OpenType features (incl. no way to DISABLE e.g. `calt`)
+- Open type is supported, but no way to control features (incl. no way to DISABLE e.g. `calt`)
+- Clipping boundary is not antialiased
+- No effects, e.g. shadow
 
 ## JavaFX 14
 
@@ -29,6 +33,8 @@ In both test I didn’t use AWT/Swing/JavaFX components/scene, but created a ful
 - No OpenType font features (no ligatures)
 - No way to reuse text layout (+measures) when later rendering same text to canvas
 - Drawing 32x DropShadow effects drops fps to ~30 fps
+- Single rounded rect clip drops fps to ~30
+- 40 rounded rect clips drop fps to ~10
 - LCD font smoothing seems to be very bad
 
 ## Test machine
