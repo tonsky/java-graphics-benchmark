@@ -5,7 +5,7 @@ In both test I didn’t use AWT/Swing/JavaFX components/scene, but created a ful
 ## AWT
 
 ```
-./script/awt
+./script/awt.sh
 ```
 
 ![](screenshots/awt.png)
@@ -19,11 +19,11 @@ In both test I didn’t use AWT/Swing/JavaFX components/scene, but created a ful
 - Clipping boundary is not antialiased
 - No effects, e.g. shadow
 
-## JavaFX 14
+## JavaFX 15
 
 ```
-./script/bootstrap
-./script/fx
+./script/bootstrap.sh
+./script/run.sh
 ```
 
 ![](screenshots/fx.png)
