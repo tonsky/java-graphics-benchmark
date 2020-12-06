@@ -20,7 +20,7 @@ public class ShadowsDemo extends Demo {
     }
 
     @Override
-    public void draw(GraphicsContext gc, int width, int height, float dpi, int xpos, int ypos) {
+    public void draw(GraphicsContext gc, int width, int height, float dpi) {
         if (arr == null) {
             var random = new Random();
             arr = new float[squares * 4];

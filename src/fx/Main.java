@@ -15,7 +15,7 @@ import javafx.stage.*;
 import fx.*;
 
 public class Main extends Application {
-    int width = 1400;
+    int width = 1440;
     int height = 810;
     long frames = 0;
 

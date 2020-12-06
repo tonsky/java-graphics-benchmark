@@ -14,7 +14,7 @@ public class CirclesDemo extends Demo {
     }
 
     @Override
-    public void draw(GraphicsContext gc, int width, int height, float dpi, int xpos, int ypos) {
+    public void draw(GraphicsContext gc, int width, int height, float dpi) {
         if (arr == null) {
             var random = new Random();
             arr = new float[100000 * 4];
