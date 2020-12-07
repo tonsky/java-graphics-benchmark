@@ -32,7 +32,7 @@ public class Main extends Application {
 
     public void repaint(GraphicsContext gc) {
         gc.clearRect(0, 0, width, height);
-        demos[demoIdx].draw(gc, width, height, 1f, 0, 0);
+        demos[demoIdx].draw(gc, width, height, 1f);
         ++frames;
     }
 
