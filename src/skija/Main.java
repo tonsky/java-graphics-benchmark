@@ -14,14 +14,16 @@ import org.jetbrains.skija.*;
 import org.jetbrains.skija.impl.*;
 
 public class Main {
-    int width = 1440;
-    int height = 810;
+    int width = 1280;
+    int height = 720;
     float dpi = 2;
     long frames = 0;
+    long lastT = 0;
     String pendingTitle;
 
     Demo[] demos = new Demo[] {
         new CirclesDemo(),
+        new GradientsDemo(),
         new ShadowsDemo(),
     };
     int demoIdx = 1;
@@ -111,7 +113,14 @@ public class Main {
             canvas.clear(0xFFFFFFFF);
             int count = canvas.save();
             canvas.scale(dpi, dpi);
-            demos[demoIdx].draw(canvas, width, height, dpi);
+
+            long now = System.nanoTime();
+            float dt = lastT == 0 ? 16.666f : (now - lastT) / 1000000f;
+            lastT = now;
+            float oscillation = (float) Math.sin((System.currentTimeMillis() % 2000) / 2000f * Math.PI); 
+            oscillation *= oscillation;
+
+            demos[demoIdx].draw(canvas, width, height, dpi, dt, oscillation);
             canvas.restoreToCount(count);
             context.flush();
             glfwSwapBuffers(window);

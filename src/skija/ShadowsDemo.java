@@ -14,7 +14,7 @@ public class ShadowsDemo extends Demo {
     }
 
     @Override
-    public void draw(Canvas canvas, int width, int height, float dpi) {
+    public void draw(Canvas canvas, int width, int height, float dpi, float dt, float oscillation) {
         if (arr == null) {
             var random = new Random();
             arr = new float[squares * 5];
@@ -22,8 +22,8 @@ public class ShadowsDemo extends Demo {
                 var size = 50 + random.nextFloat() * 50;
                 arr[i * 5] = size / 2 + random.nextFloat() * (width - size / 2);
                 arr[i * 5 + 1] = size / 2 + random.nextFloat() * (height - size / 2);
-                arr[i * 5 + 2] = random.nextFloat() * 10f - 5f;
-                arr[i * 5 + 3] = random.nextFloat() * 10f - 5f;
+                arr[i * 5 + 2] = random.nextFloat() * 0.2f - 0.1f;
+                arr[i * 5 + 3] = random.nextFloat() * 0.2f - 0.1f;
                 arr[i * 5 + 4] = size;
             }
         }
@@ -37,19 +37,19 @@ public class ShadowsDemo extends Demo {
             var size = arr[i * 5 + 4];
             var x = arr[i * 5];
             var dx = arr[i * 5 + 2];
-            if ((x + dx > width - size / 2 && dx > 0) || (x + dx < size / 2 && dx < 0)) {
+            if ((x + dx * dt > width - size / 2 && dx > 0) || (x + dx * dt < size / 2 && dx < 0)) {
                 dx = -dx;
                 arr[i * 5 + 2] = dx;
             }
-            arr[i * 5] = x + dx;
+            arr[i * 5] = x + dx * dt;
 
             var y = arr[i * 5 +1];
             var dy = arr[i * 5 + 3];
-            if ((y + dy > height - size / 2 && dy > 0) || (y + dy < size / 2 && dy < 0)) {
+            if ((y + dy * dt > height - size / 2 && dy > 0) || (y + dy * dt < size / 2 && dy < 0)) {
                 dy = -dy;
                 arr[i * 5 + 3] = dy;
             }
-            arr[i * 5 + 1] = y + dy;
+            arr[i * 5 + 1] = y + dy * dt;
 
             var rect = Rect.makeXYWH(arr[i * 5] - size / 2, arr[i * 5 + 1] - size / 2, size, size);
             if ("ShadowUtils".equals(variantTitle())) {

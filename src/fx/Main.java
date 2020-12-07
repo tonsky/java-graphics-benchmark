@@ -15,13 +15,15 @@ import javafx.stage.*;
 import fx.*;
 
 public class Main extends Application {
-    int width = 1440;
-    int height = 810;
+    int width = 1280;
+    int height = 720;
     long frames = 0;
+    long lastT = 0;
 
     Demo[] demos = new Demo[] {
         new CirclesDemo(),
         // new EverythingDemo(),
+        new GradientsDemo(),
         new ShadowsDemo(),
     };
     int demoIdx = 1;
@@ -31,8 +33,14 @@ public class Main extends Application {
     }
 
     public void repaint(GraphicsContext gc) {
+        long now = System.nanoTime();
+        float dt = lastT == 0 ? 16.666f : (now - lastT) / 1000000f;
+        lastT = now;
+        float oscillation = (float) Math.sin((System.currentTimeMillis() % 2000) / 2000f * Math.PI); 
+        oscillation *= oscillation;
+
         gc.clearRect(0, 0, width, height);
-        demos[demoIdx].draw(gc, width, height, 1f);
+        demos[demoIdx].draw(gc, width, height, 1f, dt, oscillation);
         ++frames;
     }
 

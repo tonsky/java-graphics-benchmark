@@ -176,7 +176,7 @@ public class EverythingDemo extends Demo {
     }
 
     @Override
-    public void draw(GraphicsContext gc, int width, int height, float dpi) {
+    public void draw(GraphicsContext gc, int width, int height, float dpi, float dt, float oscillation) {
         var t = System.nanoTime();
         
         paintBg(gc, width, height);

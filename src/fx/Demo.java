@@ -15,5 +15,5 @@ public abstract class Demo {
         variantIdx = (variantIdx + variants.length + delta) % variants.length;
     }
 
-    public abstract void draw(GraphicsContext gc, int width, int height, float dpi);
+    public abstract void draw(GraphicsContext gc, int width, int height, float dpi, float dt, float oscillation);
 }

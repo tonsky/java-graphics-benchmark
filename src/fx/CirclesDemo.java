@@ -13,7 +13,7 @@ public class CirclesDemo extends Demo {
     }
 
     @Override
-    public void draw(GraphicsContext gc, int width, int height, float dpi) {
+    public void draw(GraphicsContext gc, int width, int height, float dpi, float dt, float oscillation) {
         if (arr == null) {
             var random = new Random();
             arr = new float[100000 * 5];
@@ -22,8 +22,8 @@ public class CirclesDemo extends Demo {
                 var radius = 2 + random.nextFloat() * 8;
                 arr[i * 5] = radius + random.nextFloat() * (width - radius);
                 arr[i * 5 + 1] = radius + random.nextFloat() * (height - radius);
-                arr[i * 5 + 2] = random.nextFloat() - 0.5f;
-                arr[i * 5 + 3] = random.nextFloat() - 0.5f;
+                arr[i * 5 + 2] = random.nextFloat() * 0.2f - 0.1f;
+                arr[i * 5 + 3] = random.nextFloat() * 0.2f - 0.1f;
                 arr[i * 5 + 4] = radius;
                 colors[i] = new Color(
                     random.nextFloat(),
@@ -39,19 +39,19 @@ public class CirclesDemo extends Demo {
 
             var x = arr[i * 5];
             var dx = arr[i * 5 + 2];
-            if ((x + dx > width - radius && dx > 0) || (x + dx < radius && dx < 0)) {
+            if ((x + dx * dt > width - radius && dx > 0) || (x + dx * dt < radius && dx < 0)) {
                 dx = -dx;
                 arr[i * 5 + 2] = dx;
             }
-            arr[i * 5] = x + dx;
+            arr[i * 5] = x + dx * dt;
 
             var y = arr[i * 5 +1];
             var dy = arr[i * 5 + 3];
-            if ((y + dy > height - radius && dy > 0) || (y + dy < radius && dy < 0)) {
+            if ((y + dy * dt > height - radius && dy > 0) || (y + dy * dt < radius && dy < 0)) {
                 dy = -dy;
                 arr[i * 5 + 3] = dy;
             }
-            arr[i * 5 + 1] = y + dy;
+            arr[i * 5 + 1] = y + dy * dt;
 
             gc.setFill(colors[i]);
             gc.fillOval(arr[i * 5] - radius, arr[i * 5 + 1] - radius, radius * 2, radius * 2);
