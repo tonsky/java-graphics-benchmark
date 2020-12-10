@@ -41,7 +41,7 @@ public class EverythingDemo extends Demo {
         for (int x = 0; x < 8; ++x) {
             for (int y = 0; y < 8; ++ y) {
                 if ((x + y) % 2 == 0) {
-                    gc.fillRect​(width * x / 8.0,
+                    gc.fillRect(width * x / 8.0,
                                 height * y / 8.0,
                                 width / 8.0,
                                 height / 8.0);

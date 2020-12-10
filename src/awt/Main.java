@@ -1,3 +1,5 @@
+package awt;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.*;
@@ -7,7 +9,7 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-public class Awt {
+public class Main {
     static Font uiFont;
     static Font firacode;
     static double DPI = 2.0;
@@ -113,7 +115,7 @@ class Compositor {
             var t0 = System.nanoTime();
             var layerG = ((BufferedImage) layer.buffer).createGraphics();
             // var transform = new AffineTransform();
-            // transform.setToScale(Awt.DPI, Awt.DPI);
+            // transform.setToScale(Main.DPI, Main.DPI);
             // layerG.setTransform(transform);
             layerG.setRenderingHint​(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             layerG.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -121,15 +123,15 @@ class Compositor {
             // AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC, 0f);
             // layerG.setComposite(alcom);
             // layerG.setColor(new Color(0, 0, 0, 0));
-            // layerG.fillRect(0, 0, (int) (layer.size.width * Awt.DPI), (int) (layer.size.height * Awt.DPI));
+            // layerG.fillRect(0, 0, (int) (layer.size.width * Main.DPI), (int) (layer.size.height * Main.DPI));
 
             layerG.setBackground(new Color(0, 0, 0, 0));
-            layerG.clearRect(0, 0, (int) (layer.size.width * Awt.DPI), (int) (layer.size.height * Awt.DPI));
+            layerG.clearRect(0, 0, (int) (layer.size.width * Main.DPI), (int) (layer.size.height * Main.DPI));
             // layerG.clearRect(0, 0, 10, 10);
 
             // layerG.setComposite(AlphaComposite.Src);
             // layerG.setColor(new Color(0, 0, 0, 0));
-            // layerG.fillRect(0, 0, (int) (layer.size.width * Awt.DPI), (int) (layer.size.height * Awt.DPI));
+            // layerG.fillRect(0, 0, (int) (layer.size.width * Main.DPI), (int) (layer.size.height * Main.DPI));
 
             // layerG.setComposite(AlphaComposite.SrcOver);
 
@@ -194,7 +196,7 @@ class Compositor {
 
 class FPS extends Layer {
     FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, false);
-    Font font = Awt.uiFont.deriveFont(24f);
+    Font font = Main.uiFont.deriveFont(24f);
     long lastT = System.nanoTime();
 
     long[] times = new long[10];
@@ -235,7 +237,7 @@ class FPS extends Layer {
 
 class Foreground extends Layer {
     FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
-    Font font = Awt.uiFont.deriveFont(24f);
+    Font font = Main.uiFont.deriveFont(24f);
 
     public Foreground() {
         size = new Dimension(200, 100);
@@ -313,7 +315,7 @@ class Toggles extends Layer {
 class Screen extends Layer {
     FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
     // Map<TextAttribute, ?> attrs = Map.of(TextAttribute.LIGATURES, Integer.valueOf(0), TextAttribute.KERNING, Integer.valueOf(0));
-    Font font = Awt.firacode.deriveFont(11f); // .deriveFont(attrs);
+    Font font = Main.firacode.deriveFont(11f); // .deriveFont(attrs);
     Map<String, TextLayout> layoutCache = new HashMap<>();
 
     public Screen() {

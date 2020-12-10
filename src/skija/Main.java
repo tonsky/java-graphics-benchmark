@@ -40,22 +40,32 @@ public class Main {
             System.out.println(title);
     }
 
+    public float dpi(long window) {
+        float[] xscale = new float[1];
+        float[] yscale = new float[1];
+        glfwGetWindowContentScale(window, xscale, yscale);
+        return xscale[0];
+    }
+
     public void run() {
         GLFWErrorCallback.createPrint(System.err).set();
         glfwInit();
 
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will not be resizable
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
 
+        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
         long window = glfwCreateWindow(width, height, "Skija LWJGL Demo", NULL, NULL);
+        this.dpi = dpi(window);
 
         glfwSetKeyCallback(window, (win, key, scancode, action, mods) -> {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
                 glfwSetWindowShouldClose(win, true);
         });
 
-        glfwSetWindowPos(window, 0, 0);
+        glfwSetWindowPos(window, (vidmode.width() - (int) (width * dpi)) / 2, (vidmode.height() - (int) (height * dpi)) / 2);
 
         glfwMakeContextCurrent(window);
         glfwSwapInterval(0); // Disable v-sync
