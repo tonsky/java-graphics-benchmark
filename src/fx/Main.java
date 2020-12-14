@@ -25,8 +25,9 @@ public class Main extends Application {
         // new EverythingDemo(),
         new GradientsDemo(),
         new ShadowsDemo(),
+        new VSyncDemo(),
     };
-    int demoIdx = 1;
+    int demoIdx = 3;
 
     public static void main(String[] args) throws Exception {
         launch();

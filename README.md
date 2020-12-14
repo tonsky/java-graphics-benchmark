@@ -16,6 +16,12 @@ JavaFX 15:
 python script/fx.py
 ```
 
+VSync demo requires command-line flag:
+
+```
+python script/fx.py --vsync
+```
+
 Skija 0.6.32:
 
 ```

@@ -16,4 +16,7 @@ public abstract class Demo {
     }
 
     public abstract void draw(Canvas canvas, int width, int height, float dpi, float dt, float osscilation);
+
+    public void onEnter() {}
+    public void onExit() {}
 }

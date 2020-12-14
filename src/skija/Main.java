@@ -25,8 +25,9 @@ public class Main {
         new CirclesDemo(),
         new GradientsDemo(),
         new ShadowsDemo(),
+        new VSyncDemo(),
     };
-    int demoIdx = 1;
+    int demoIdx = 3;
 
     public static void main(String [] args) throws Exception {
         new Main().run();
@@ -68,7 +69,7 @@ public class Main {
         glfwSetWindowPos(window, (vidmode.width() - (int) (width * dpi)) / 2, (vidmode.height() - (int) (height * dpi)) / 2);
 
         glfwMakeContextCurrent(window);
-        glfwSwapInterval(0); // Disable v-sync
+        glfwSwapInterval(1); // Disable v-sync
         glfwShowWindow(window);
 
         GL.createCapabilities();
@@ -83,11 +84,15 @@ public class Main {
             if (action == GLFW_PRESS) {
                 Demo demo = demos[demoIdx];
                 if (GLFW_KEY_LEFT == key) {
+                    demo.onExit();
                     demoIdx = (demoIdx + demos.length - 1) % demos.length;
+                    demos[demoIdx].onEnter();
                     frames = 0;
                     updateTitle();
                 } else if (GLFW_KEY_RIGHT == key) {
+                    demo.onExit();
                     demoIdx = (demoIdx + 1) % demos.length;
+                    demos[demoIdx].onEnter();
                     frames = 0;
                     updateTitle();
                 } else if (GLFW_KEY_UP == key) {
@@ -107,6 +112,7 @@ public class Main {
         });
 
         updateTitle();
+        demos[demoIdx].onEnter();
 
         new Timer(true).scheduleAtFixedRate(new TimerTask() {
             public void run() {

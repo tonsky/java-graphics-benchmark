@@ -74,6 +74,7 @@ def main(argv):
     "--release", "11",
     "--module-path", "libs/javafx-sdk-15/lib",
     "--add-modules", "javafx.graphics",
+    "--add-exports", "javafx.graphics/com.sun.scenario=ALL-UNNAMED",
     "-d", "classes"] 
     + glob.glob("src/fx/*.java"),
     cwd=WD)
@@ -81,11 +82,15 @@ def main(argv):
   subprocess.check_call(["java",
     "--module-path", "libs/javafx-sdk-15/lib",
     "--add-modules", "javafx.graphics",
+    "--add-exports", "javafx.graphics/com.sun.scenario=ALL-UNNAMED",
     "-cp", "classes",
     "-Dprism.verbose=true",
-    "-Djavafx.animation.fullspeed=true",
+    # "-Dcom.sun.scenario.animation.adaptivepulse=true",
+    # "-Dquantum.multithreaded=false",
     # "-Djavafx.pulseLogger=true",
-    "fx.Main"],
+    ] +
+    ([] if "--vsync" in argv else ["-Djavafx.animation.fullspeed=true"]) +
+    ["fx.Main"],
     cwd=WD)
 
   return 0
