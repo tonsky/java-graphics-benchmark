@@ -23,11 +23,14 @@ public class Main {
 
     Demo[] demos = new Demo[] {
         new CirclesDemo(),
+        new ClipDemo(),
         new GradientsDemo(),
         new ShadowsDemo(),
+        new TypographyDemo(),
         new VSyncDemo(),
+        new WordsDemo()
     };
-    int demoIdx = 3;
+    int demoIdx = 0;
 
     public static void main(String [] args) throws Exception {
         new Main().run();
@@ -35,7 +38,7 @@ public class Main {
 
     public void updateTitle() {
         Demo demo = demos[demoIdx];
-        String title = demo.getClass().getSimpleName() + " - " + demo.variants[demo.variantIdx] + " - " + frames + " fps";
+        String title = "Skija - " + demo.getClass().getSimpleName() + " - " + demo.variants[demo.variantIdx] + " - " + frames + " fps";
         pendingTitle = title;
         if (frames > 0)
             System.out.println(title);
@@ -66,10 +69,12 @@ public class Main {
                 glfwSetWindowShouldClose(win, true);
         });
 
-        glfwSetWindowPos(window, (vidmode.width() - (int) (width * dpi)) / 2, (vidmode.height() - (int) (height * dpi)) / 2);
+        System.out.println(vidmode.width() + " " + width);
+        // System.out.println("x=" + ((vidmode.width() * dpi - (int) (width * dpi)) / 2) + ", y=" + ((vidmode.height() * dpi - (int) (height * dpi)) / 2));
+        glfwSetWindowPos(window, (int) ((vidmode.width() - width) / 2), (int) ((vidmode.height() - height) / 2));
 
         glfwMakeContextCurrent(window);
-        glfwSwapInterval(1); // Disable v-sync
+        glfwSwapInterval(0); // Disable v-sync
         glfwShowWindow(window);
 
         GL.createCapabilities();
@@ -97,14 +102,18 @@ public class Main {
                     updateTitle();
                 } else if (GLFW_KEY_UP == key) {
                     if (demo.variants.length > 1) {
+                        demo.onExit();
                         demo.variantIdx = (demo.variantIdx + demo.variants.length - 1) % demo.variants.length;
                         frames = 0;
+                        demo.onEnter();
                         updateTitle();
                     }
                 } else if (GLFW_KEY_DOWN == key) {
                     if (demo.variants.length > 1) {
+                        demo.onExit();
                         demo.variantIdx = (demo.variantIdx + 1) % demo.variants.length;
                         frames = 0;
+                        demo.onEnter();
                         updateTitle();
                     }
                 }
@@ -126,9 +135,6 @@ public class Main {
                 glfwSetWindowTitle(window, pendingTitle);
                 pendingTitle = null;
             }
-            canvas.clear(0xFFFFFFFF);
-            int count = canvas.save();
-            canvas.scale(dpi, dpi);
 
             long now = System.nanoTime();
             float dt = lastT == 0 ? 16.666f : (now - lastT) / 1000000f;
@@ -136,8 +142,12 @@ public class Main {
             float oscillation = (float) Math.sin((System.currentTimeMillis() % 2000) / 2000f * Math.PI); 
             oscillation *= oscillation;
 
+            canvas.clear(0xFFFFFFFF);
+            int count = canvas.save();
+            demos[demoIdx].scale(canvas, dpi);
             demos[demoIdx].draw(canvas, width, height, dpi, dt, oscillation);
             canvas.restoreToCount(count);
+            
             context.flush();
             glfwSwapBuffers(window);
             glfwPollEvents();

@@ -22,12 +22,15 @@ public class Main extends Application {
 
     Demo[] demos = new Demo[] {
         new CirclesDemo(),
+        new ClipDemo(),
         // new EverythingDemo(),
         new GradientsDemo(),
         new ShadowsDemo(),
+        new TypographyDemo(),
         new VSyncDemo(),
+        new WordsDemo(),
     };
-    int demoIdx = 3;
+    int demoIdx = 4;
 
     public static void main(String[] args) throws Exception {
         launch();
@@ -47,7 +50,7 @@ public class Main extends Application {
 
     public void updateTitle(Stage stage) {
         Demo demo = demos[demoIdx];
-        String title = demo.getClass().getSimpleName() + " - " + demo.variants[demo.variantIdx] + " - " + frames + " fps";
+        String title = "JavaFX - " + demo.getClass().getSimpleName() + " - " + demo.variants[demo.variantIdx] + " - " + frames + " fps";
         stage.setTitle(title);
         if (frames > 0)
             System.out.println(title);

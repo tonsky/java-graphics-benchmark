@@ -7,6 +7,10 @@ import org.lwjgl.glfw.*;
 public class VSyncDemo extends Demo {
     private int frame = 0;
 
+    public VSyncDemo() {
+        variants = new String[] { "VSync ON", "VSync OFF" };
+    }
+
     @Override
     public void draw(Canvas canvas, int width, int height, float dpi, float dt, float oscillation) {
         try (var font = new Font().setSize(128);
@@ -39,7 +43,7 @@ public class VSyncDemo extends Demo {
 
     @Override
     public void onEnter() {
-        GLFW.glfwSwapInterval(1);
+        GLFW.glfwSwapInterval("VSync ON".equals(variants[variantIdx]) ? 1 : 0);
     }
 
     @Override

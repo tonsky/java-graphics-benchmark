@@ -32,7 +32,7 @@ def fetch_jar(lib, repo="https://repo1.maven.org/maven2"):
 
 def main(argv):
   lwjgl = "3.2.3"
-  skija = "0.6.32"
+  skija = "0.6.37"
   if platform.system() == "Windows":
     classifier = "windows"
   elif platform.system() == "Darwin":

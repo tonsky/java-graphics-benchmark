@@ -17,6 +17,13 @@ public abstract class Demo {
 
     public abstract void draw(Canvas canvas, int width, int height, float dpi, float dt, float osscilation);
 
-    public void onEnter() {}
-    public void onExit() {}
+    public void onEnter() {
+    }
+    
+    public void onExit() {
+    }
+
+    public void scale(Canvas canvas, float dpi) {
+        canvas.scale(dpi, dpi);
+    }
 }
