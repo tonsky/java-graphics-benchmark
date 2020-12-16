@@ -78,6 +78,7 @@ macOS:
 - MacBook Pro (15-inch, 2019)
 - 2.3 GHz 8-Core Intel Core i9
 - Radeon Pro 560X 4 GB
+- OpenJDK 15 (build 15+36-1562)
 
 Windows / Ubuntu 20.04.1
 
