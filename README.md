@@ -40,16 +40,20 @@ FPS counter is printed to console and to window title.
 
 Frames per second: more is better.
 
-Platform | Scaling | Engine | Circles | Clip | Gradients | Shadows | Words |
----------|---------|--------|---------|------|-----------|---------|-------|
-macOS    | 1x      | Skija  | 110     | 180  | 120       | 750     | 32    |
-macOS    | 1x      | JavaFX | 520     | < 1  | 370       | 14      | 320   |
-macOS    | 2x      | Skija  | 105     | 165  | 115       | 345     | 35    |
-macOS    | 2x      | JavaFX | 275     | < 1  | 305       | 13      | 335   |
-Windows  | 1x      | Skija  | 75      | 140  | 105       | 585     | 30    |	
-Windows  | 1x      | JavaFX | 620     | < 1  | 330       | 70      | 333   |
-Windows  | 2x      | Skija  | 75      | 140  | 105       | 575     | 33    |
-Windows  | 2x      | JavaFX | 525     | < 1  | 342       | 52      | 333   | 
+Platform | Scaling  | Engine | Circles | Clip | Gradients | Shadows | Words |
+---------|----------|--------|--------:|-----:|----------:|--------:|------:|
+macOS    | 1x       | Skija  | 110     | 180  | 120       | 750     | 32    |
+macOS    | 1x       | JavaFX | 520     | < 1  | 370       | 14      | 320   |
+macOS    | 2x       | Skija  | 105     | 165  | 115       | 345     | 35    |
+macOS    | 2x       | JavaFX | 275     | < 1  | 305       | 13      | 335   |
+Windows  | 1x       | Skija  | 75      | 140  | 105       | 585     | 30    |	
+Windows  | 1x       | JavaFX | 620     | < 1  | 330       | 70      | 333   |
+Windows  | 2x       | Skija  | 75      | 140  | 105       | 575     | 33    |
+Windows  | 2x       | JavaFX | 525     | < 1  | 342       | 52      | 333   |
+Ubuntu   | 1x       | Skija  | 125     | 190  | 143       | 1115    | 42    |
+Ubuntu   | 1x       | JavaFX | 460     | 6    | 320       | 110     | 295   |
+Ubuntu   | 2x       | Skija  | 120     | 190  | 146       | 1100    | 45    |
+Ubuntu   | 2x       | JavaFX | 470     | 6    | 340       | 110     | 315   |
 
 Discovered JavaFX issues:
 
@@ -59,6 +63,7 @@ Discovered JavaFX issues:
 - Rendered text too bold on macOS
 - Text with LCD smoothing renders very badly on macOS
 - Path clip ignores FillRule
+- Display scaling detected incorrectly on Ubuntu
 
 Missing JavaFX features:
 
@@ -74,11 +79,11 @@ macOS:
 - 2.3 GHz 8-Core Intel Core i9
 - Radeon Pro 560X 4 GB
 
-Windows:
+Windows / Ubuntu 20.04.1
 
 - Inter Core i5-6500 @3.2 Ghz
 - Radeon RX Vega 64 8 GB
-- OpenJDK Runtime Environment (build 15+36-1562)
+- OpenJDK 15 (Windows 15+36-1562 / Ubuntu 15.0.1+9-18)
 
 Versions:
 
