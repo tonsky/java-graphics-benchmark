@@ -35,12 +35,6 @@ def add_cp(lib, repo="https://repo1.maven.org/maven2"):
   fetch(repo + "/" + lib, target)
   return target
 
-def find_files(dir, pattern=re.compile(".*")):
-  for root, dirs, files in os.walk(dir):
-    for name in files:
-      if pattern.match(name):
-        yield os.path.join(root, name)
-
 def main(argv):
   version = "15"
   if platform.system() == "Windows":
@@ -78,6 +72,8 @@ def main(argv):
     "-d", "classes"] 
     + glob.glob("src/fx/*.java"),
     cwd=WD)
+
+  subprocess.check_call(["java", "-version"])
 
   subprocess.check_call(["java",
     "--module-path", "libs/javafx-sdk-15/lib",

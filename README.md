@@ -36,7 +36,7 @@ Use ↑↓ to switch between scene parameters (if supported).
 
 FPS counter is printed to console and to window title.
 
-# Results
+## Benchmarks
 
 Frames per second: more is better.
 
@@ -46,6 +46,10 @@ macOS    | 1x      | Skija  | 110     | 180  | 120       | 750     | 32    |
 macOS    | 1x      | JavaFX | 520     | < 1  | 370       | 14      | 320   |
 macOS    | 2x      | Skija  | 105     | 165  | 115       | 345     | 35    |
 macOS    | 2x      | JavaFX | 275     | < 1  | 305       | 13      | 335   |
+Windows  | 1x      | Skija  | 75      | 140  | 105       | 585     | 30    |	
+Windows  | 1x      | JavaFX | 620     | < 1  | 330       | 70      | 333   |
+Windows  | 2x      | Skija  | 75      | 140  | 105       | 575     | 33    |
+Windows  | 2x      | JavaFX | 525     | < 1  | 342       | 52      | 333   | 
 
 Discovered JavaFX issues:
 
@@ -64,7 +68,17 @@ Missing JavaFX features:
 
 Test machines:
 
-- macOS: MacBook Pro (15-inch, 2019) 2.3 GHz 8-Core Intel Core i9 Radeon Pro 560X 4 GB
+macOS:
+
+- MacBook Pro (15-inch, 2019)
+- 2.3 GHz 8-Core Intel Core i9
+- Radeon Pro 560X 4 GB
+
+Windows:
+
+- Inter Core i5-6500 @3.2 Ghz
+- Radeon RX Vega 64 8 GB
+- OpenJDK Runtime Environment (build 15+36-1562)
 
 Versions:
 

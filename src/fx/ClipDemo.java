@@ -7,8 +7,8 @@ import javafx.scene.shape.*;
 public class ClipDemo extends Demo {
     @Override
     public void draw(GraphicsContext gc, int width, int height, float dpi, float dt, float oscillation) {
-        for (int x = 5; x <= width - 25; x += 100) {
-            for (int y = 5; y <= height - 25; y += 100) {
+        for (int x = 5; x <= width - 25; x += 25) {
+            for (int y = 5; y <= height - 25; y += 25) {
                 gc.save();
                 gc.translate(x, y);
         

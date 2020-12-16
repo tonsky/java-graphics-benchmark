@@ -53,7 +53,8 @@ def main(argv):
   java_opts = ["-XstartOnFirstThread"] if platform.system() == "Darwin" else []
   
   subprocess.check_call(["javac", "-encoding", "UTF8", "--release", "11", "-cp", cp, "-d", "classes"] + glob.glob("src/skija/*.java"), cwd=WD)
-  subprocess.check_call(["java", "-cp", "classes" + CP_SEP + cp, "-Djava.awt.headless=true", "-ea"] + java_opts + ["skija.Main"], cwd=WD)
+  subprocess.check_call(["java", "-version"])
+  subprocess.check_call(["java", "-cp", "classes" + CP_SEP + cp, "-Djava.awt.headless=true"] + java_opts + ["skija.Main"], cwd=WD)
   return 0
 
 if __name__ == '__main__':
