@@ -40,6 +40,8 @@ FPS counter is printed to console and to window title.
 
 Frames per second: more is better.
 
+Note: Windows/Ubuntu machine has different hardware than MacBook Pro, so not directly comparable.
+
 Platform | Scaling  | Engine | Circles | Clip | Gradients | Shadows | Words |
 ---------|----------|--------|--------:|-----:|----------:|--------:|------:|
 macOS    | 1x       | Skija  | 110     | 180  | 120       | 750     | 32    |
