@@ -36,6 +36,7 @@ def main(argv):
     "--add-exports=java.desktop/sun.font=ALL-UNNAMED",
     "--add-exports=java.desktop/com.apple.eawt=ALL-UNNAMED",
     "--add-exports=java.desktop/com.apple.laf=ALL-UNNAMED",
+    "--add-opens=java.desktop/sun.java2d.pipe.hw=ALL-UNNAMED",
     "awt.Main"], cwd=WD)
   return 0
 
